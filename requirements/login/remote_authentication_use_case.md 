@@ -1,10 +1,10 @@
 # Remote Authentication Use Case
 
 > ## Success story
-1. System validates the data
-2. System makes a request for the login API URL
-3. System validates data received from API
-4. System delivers user account data
+1. ✅ System validates the data
+2. ✅ System makes a request for the login API URL
+3. ✅ System validates data received from API
+4. ✅ System delivers user account data
 
 > ## Exception - Invalid URL
 1. ✅ System returns an unexpected error message

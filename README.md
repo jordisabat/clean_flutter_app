@@ -2,3 +2,5 @@
 
 Flutter, TDD, Clean Architecture, SOLID and Design Patterns
 
+## Arquitecture
+![Authentication](./docs/images/architecture_clean_flutter.png)

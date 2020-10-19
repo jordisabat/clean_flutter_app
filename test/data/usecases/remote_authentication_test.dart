@@ -1,5 +1,6 @@
 import 'package:clean_flutter_app/data/http/http.dart';
 import 'package:clean_flutter_app/data/usecases/usecases.dart';
+import 'package:clean_flutter_app/domain/entities/account_entity.dart';
 import 'package:clean_flutter_app/domain/helper/helper.dart';
 import 'package:clean_flutter_app/domain/usecases/usecases.dart';
 import 'package:faker/faker.dart';
@@ -25,6 +26,15 @@ void main() {
   });
 
   test('Should call HttpClient with correct values', () async {
+    when(httpClient.request(
+            url: anyNamed('url'),
+            method: anyNamed('method'),
+            body: anyNamed('body')))
+        .thenAnswer((_) async => {
+              'accessToken': faker.guid.guid(),
+              'name': faker.person.name(),
+            });
+
     await sut.auth(params);
 
     verify(
@@ -87,4 +97,25 @@ void main() {
 
     expect(future, throwsA(DomainError.invalidCredentials));
   });
+
+  test(
+    'Should return an Account if HttpClient returns 200',
+    () async {
+      // arrange
+      final accessToken = faker.guid.guid();
+      when(httpClient.request(
+              url: anyNamed('url'),
+              method: anyNamed('method'),
+              body: anyNamed('body')))
+          .thenAnswer((_) async => {
+                'accessToken': accessToken,
+                'name': faker.person.name(),
+              });
+      // act
+      final account = await sut.auth(params);
+
+      // assert
+      expect(account.token, account.token);
+    },
+  );
 }

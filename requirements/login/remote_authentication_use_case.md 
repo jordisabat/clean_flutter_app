@@ -7,7 +7,7 @@
 4. System delivers user account data
 
 > ## Exception - Invalid URL
-1. System returns an unexpected error message
+1. ✅ System returns an unexpected error message
 
 > ## Exception - Invalid data
 1. System returns an unexpected error message

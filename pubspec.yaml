@@ -1,7 +1,7 @@
 name: clean_flutter_app
 description: A new Flutter project.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -11,15 +11,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.0
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  test:
-  mockito:
-  faker:
+  faker: null
+  mockito: null
+  test: null
 
 flutter:
   uses-material-design: true

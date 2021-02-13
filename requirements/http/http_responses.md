@@ -1,10 +1,11 @@
 # HTTP
 
 > ## Success
-1. Request with a valid http verb (post)
-2. Pass the JSON content type to the headers
-3. Ok - 200 and answer with data
-4. No content - 204 and response without data
+1. ✅ Request with a valid http (post)
+2. ✅ Pass the JSON content type to the headers
+3. Call request with correct body
+4. Ok - 200 and answer with data
+5. No content - 204 and response without data
 
 > ## Errors
 1. Bad request - 400

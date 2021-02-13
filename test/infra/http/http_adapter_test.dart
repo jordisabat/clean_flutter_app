@@ -103,6 +103,27 @@ void main() {
 
       expect(future, throwsA(HttpError.badRequest));
     });
+    test('Should return Unauthorized if post with body returns 401', () async {
+      mockResponse(401);
+
+      final future = sut.request(url: url, method: 'post');
+
+      expect(future, throwsA(HttpError.unauthorized));
+    });
+    test('Should return Forbidden if post with body returns 403', () async {
+      mockResponse(403);
+
+      final future = sut.request(url: url, method: 'post');
+
+      expect(future, throwsA(HttpError.forbidden));
+    });
+    test('Should return NotFound if post with body returns 404', () async {
+      mockResponse(404);
+
+      final future = sut.request(url: url, method: 'post');
+
+      expect(future, throwsA(HttpError.notFound));
+    });
     test('Should return BadResquest if post with body returns 400', () async {
       mockResponse(500);
 

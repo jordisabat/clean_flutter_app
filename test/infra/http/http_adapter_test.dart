@@ -40,11 +40,13 @@ void main() {
           ),
         );
 
-    void mockResponse(
-      int statusCode, {
-      String body = '{"any_key":"any_value"}',
-    }) {
+    void mockResponse(int statusCode,
+        {String body = '{"any_key":"any_value"}'}) {
       mockRequest().thenAnswer((_) async => Response(body, statusCode));
+    }
+
+    void mockError() {
+      mockRequest().thenThrow(Exception());
     }
 
     setUp(() {
@@ -137,8 +139,15 @@ void main() {
 
       expect(future, throwsA(HttpError.notFound));
     });
-    test('Should return BadResquest if post with body returns 400', () async {
+    test('Should return BadResquest if post with body returns 500', () async {
       mockResponse(500);
+
+      final future = sut.request(url: url, method: 'post');
+
+      expect(future, throwsA(HttpError.serverError));
+    });
+    test('Should return ServerError if post throws', () async {
+      mockError();
 
       final future = sut.request(url: url, method: 'post');
 

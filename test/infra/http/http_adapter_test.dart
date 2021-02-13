@@ -1,3 +1,4 @@
+import 'package:clean_flutter_app/data/http/http_error.dart';
 import 'package:clean_flutter_app/infra/http/http.dart';
 import 'package:faker/faker.dart';
 import 'package:http/http.dart';
@@ -19,10 +20,17 @@ void main() {
 
   group('post', () {
     PostExpectation mockRequest() => when(
-        client.post(any, body: anyNamed('body'), headers: anyNamed('headers')));
+          client.post(
+            any,
+            body: anyNamed('body'),
+            headers: anyNamed('headers'),
+          ),
+        );
 
-    void mockResponse(int statusCode,
-        {String body = '{"any_key":"any_value"}'}) {
+    void mockResponse(
+      int statusCode, {
+      String body = '{"any_key":"any_value"}',
+    }) {
       mockRequest().thenAnswer((_) async => Response(body, statusCode));
     }
 
@@ -31,8 +39,11 @@ void main() {
     });
 
     test('Should call post with correct values', () async {
-      await sut
-          .request(url: url, method: 'post', body: {'any_key': 'any_value'});
+      await sut.request(
+        url: url,
+        method: 'post',
+        body: {'any_key': 'any_value'},
+      );
 
       verify(client.post(url,
           headers: {
@@ -76,6 +87,21 @@ void main() {
       final response = await sut.request(url: url, method: 'post');
 
       expect(response, null);
+    });
+
+    test('Should return BadResquest if post returns 400', () async {
+      mockResponse(400);
+
+      final future = sut.request(url: url, method: 'post');
+
+      expect(future, throwsA(HttpError.badRequest));
+    });
+    test('Should return BadResquest if post with body returns 400', () async {
+      mockResponse(400, body: '');
+
+      final future = sut.request(url: url, method: 'post');
+
+      expect(future, throwsA(HttpError.badRequest));
     });
   });
 }

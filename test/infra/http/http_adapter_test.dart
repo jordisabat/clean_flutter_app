@@ -60,7 +60,7 @@ void main() {
         body: {'any_key': 'any_value'},
       );
 
-      verify(client.post(url,
+      verify(client.post(Uri.parse(url),
           headers: {
             'content-type': 'application/json',
             'accept': 'application/json'

@@ -69,14 +69,18 @@ class LoginPage extends StatelessWidget {
                         }),
                     Padding(
                       padding: const EdgeInsets.only(top: 8, bottom: 32),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          icon: Icon(Icons.lock),
-                        ),
-                        obscureText: true,
-                        onChanged: presenter.validatePassword,
-                      ),
+                      child: StreamBuilder<String>(
+                          stream: presenter.passwordErrorStream,
+                          builder: (context, snapshot) {
+                            return TextFormField(
+                              decoration: InputDecoration(
+                                  labelText: 'Password',
+                                  icon: Icon(Icons.lock),
+                                  errorText: snapshot.data),
+                              obscureText: true,
+                              onChanged: presenter.validatePassword,
+                            );
+                          }),
                     ),
                     ElevatedButton(
                       onPressed: null,

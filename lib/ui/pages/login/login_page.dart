@@ -54,12 +54,15 @@ class LoginPage extends StatelessWidget {
                         builder: (context, snapshot) {
                           return TextFormField(
                             decoration: InputDecoration(
-                                labelText: 'Email',
-                                icon: Icon(
-                                  Icons.email,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                                errorText: snapshot.data),
+                              labelText: 'Email',
+                              icon: Icon(
+                                Icons.email,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              errorText: snapshot.data?.isEmpty == true
+                                  ? null
+                                  : snapshot.data,
+                            ),
                             keyboardType: TextInputType.emailAddress,
                             onChanged: presenter.validateEmail,
                           );

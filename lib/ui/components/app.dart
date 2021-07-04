@@ -53,7 +53,7 @@ class App extends StatelessWidget {
         textButtonTheme: TextButtonThemeData(style: flatButtonStyle),
         elevatedButtonTheme: ElevatedButtonThemeData(style: raisedButtonStyle),
       ),
-      home: LoginPage(),
+      home: LoginPage(null),
     );
   }
 }

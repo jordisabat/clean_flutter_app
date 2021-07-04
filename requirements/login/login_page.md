@@ -11,7 +11,7 @@
 8. ✅ Show error message if an invalid password
 9. ✅ Remove error message if valid password
 10. ✅ Enable login button if all main fields valid
-11. Disable login button if any field is invalid
+11. ✅ Disable login button if any field is invalid
 12. Display loading at start of login action
 13. Authenticate user with email and password entered in the form
 14. Display error message if login fails

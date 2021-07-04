@@ -74,9 +74,12 @@ class LoginPage extends StatelessWidget {
                           builder: (context, snapshot) {
                             return TextFormField(
                               decoration: InputDecoration(
-                                  labelText: 'Password',
-                                  icon: Icon(Icons.lock),
-                                  errorText: snapshot.data),
+                                labelText: 'Password',
+                                icon: Icon(Icons.lock),
+                                errorText: snapshot.data?.isEmpty == true
+                                    ? null
+                                    : snapshot.data,
+                              ),
                               obscureText: true,
                               onChanged: presenter.validatePassword,
                             );

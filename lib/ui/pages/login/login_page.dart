@@ -1,3 +1,4 @@
+import 'package:clean_flutter_app/ui/components/components.dart';
 import 'package:flutter/material.dart';
 
 import 'login_presenter.dart';
@@ -25,26 +26,9 @@ class _LoginPageState extends State<LoginPage> {
         builder: (context) {
           widget.presenter.isLoadingStream.listen((isLoading) {
             if (isLoading) {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) => SimpleDialog(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                        SizedBox(height: 10),
-                        Text('Loading...')
-                      ],
-                    )
-                  ],
-                ),
-              );
+              showLoading(context);
             } else {
-              if (Navigator.canPop(context)) {
-                Navigator.of(context).pop();
-              }
+              hideLoading(context);
             }
           });
 
@@ -66,36 +50,8 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  height: 240,
-                  margin: EdgeInsets.only(bottom: 32),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          Theme.of(context).primaryColorLight,
-                          Theme.of(context).primaryColorDark,
-                        ],
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0, 0),
-                          spreadRadius: 0,
-                          blurRadius: 4,
-                          color: Colors.black,
-                        )
-                      ],
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(80),
-                      )),
-                  child: Image(
-                    image: AssetImage('lib/ui/assets/logo.png'),
-                  ),
-                ),
-                Text('Login'.toUpperCase(),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline1),
+                LoginHeader(),
+                Headline1(text: 'Login'),
                 Padding(
                   padding: const EdgeInsets.all(32),
                   child: Form(

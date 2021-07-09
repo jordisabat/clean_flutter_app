@@ -13,8 +13,7 @@
 10. ✅ Enable login button if all main fields valid
 11. ✅ Disable login button if any field is invalid
 12. Display loading at start of login action
-13. Authenticate user with email and password entered in the form
+13. Call the authenticate method
 14. Display error message if login fails
-15. Write user token in cache to customize logged in
-16. Redirect user to poll list screen
-17. Hide loading at end of login action
+15. Hide loading at end of login action
+16. Close streams when page starts

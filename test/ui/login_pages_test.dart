@@ -12,20 +12,20 @@ void main() {
   LoginPresenter presenter;
   StreamController<String> emailErrorController;
   StreamController<String> passwordErrorController;
-  StreamController<bool> isFormValidStream;
+  StreamController<bool> isFormValidController;
 
   Future<void> loadPage(WidgetTester tester) async {
     presenter = LoginPresenterSpy();
     emailErrorController = StreamController<String>();
     passwordErrorController = StreamController<String>();
-    isFormValidStream = StreamController<bool>();
+    isFormValidController = StreamController<bool>();
 
     when(presenter.emailErrorStream)
         .thenAnswer((_) => emailErrorController.stream);
     when(presenter.passwordErrorStream)
         .thenAnswer((_) => passwordErrorController.stream);
     when(presenter.isFormValidStream)
-        .thenAnswer((_) => isFormValidStream.stream);
+        .thenAnswer((_) => isFormValidController.stream);
 
     final loginPage = MaterialApp(home: LoginPage(presenter));
     await tester.pumpWidget(loginPage);
@@ -34,7 +34,7 @@ void main() {
   tearDown(() {
     emailErrorController.close();
     passwordErrorController.close();
-    isFormValidStream.close();
+    isFormValidController.close();
   });
 
   testWidgets('Should load with correct initial state',
@@ -169,7 +169,7 @@ void main() {
       (WidgetTester tester) async {
     await loadPage(tester);
 
-    isFormValidStream.add(true);
+    isFormValidController.add(true);
     await tester.pump();
 
     final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
@@ -180,7 +180,7 @@ void main() {
       (WidgetTester tester) async {
     await loadPage(tester);
 
-    isFormValidStream.add(false);
+    isFormValidController.add(false);
     await tester.pump();
 
     final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
@@ -188,5 +188,18 @@ void main() {
       button.onPressed,
       null,
     );
+  });
+
+  testWidgets('Should call authetication on form submit',
+      (WidgetTester tester) async {
+    await loadPage(tester);
+
+    isFormValidController.add(true);
+    await tester.pump();
+
+    await tester.tap(find.byType(ElevatedButton));
+    await tester.pump();
+
+    verify(presenter.auth()).called(1);
   });
 }

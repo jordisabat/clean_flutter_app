@@ -5,7 +5,7 @@
 2. ✅ Notify emailErrorStream with the same Validation error if it returns an error
 3. Notify emailErrorStream with null if Validation does not return an error
 4. ✅ Do not notify emailErrorStream if value equals last
-5. Notify isFormValidStream after changing email
+5. ✅ Notify isFormValidStream after changing email
 6. Call Validation when changing password
 7. Notify the passwordErrorStream with the same error as Validation, if it returns an error
 8. Notify the passwordErrorStream with null if the Validation does not return an error

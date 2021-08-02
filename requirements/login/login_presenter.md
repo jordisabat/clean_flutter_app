@@ -16,7 +16,7 @@
 13. ✅ Call Authentication with correct email and password
 14. ✅ Notify isLoadingStream as true before calling Authentication
 15. ✅ Notify isLoadingStream as false at the end of Authentication
-16. Notify mainErrorStream if Authentication returns a DomainError
+16. ✅ Notify mainErrorStream if Authentication returns a DomainError
 17. Close all Streams in dispose
 18. ⛔️ Write Account in cache on success
 19. ⛔️ Take the user to the Poll screen on success

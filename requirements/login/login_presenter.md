@@ -13,7 +13,7 @@
 10. ✅ Notify isFormValidStream after changing password
 11. ✅ For the form to be valid all Error Streams must be null and all mandatory fields cannot be empty
 12. ✅ Do not notify isFormValidStream if value equals last
-13. Call Authentication with correct email and password
+13. ✅ Call Authentication with correct email and password
 14. Notify isLoadingStream as true before calling Authentication
 15. Notify isLoadingStream as false at the end of Authentication
 16. Notify mainErrorStream if Authentication returns a DomainError

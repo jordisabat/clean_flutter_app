@@ -1,19 +1,6 @@
 import 'package:test/test.dart';
 
-abstract class FieldValidation {
-  String get field;
-  String validate(String value);
-}
-
-class RequiredFieldValidation implements FieldValidation {
-  final String field;
-
-  RequiredFieldValidation(this.field);
-
-  String validate(String value) {
-    return value.isNotEmpty == true ? null : 'Required field';
-  }
-}
+import 'package:clean_flutter_app/validation/validators/required_field_validation.dart';
 
 void main() {
   RequiredFieldValidation sut;

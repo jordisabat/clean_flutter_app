@@ -1,19 +1,6 @@
-import 'package:clean_flutter_app/validation/protocols/field_validation.dart';
+import 'package:clean_flutter_app/validation/validators/validators.dart';
 import 'package:faker/faker.dart';
 import 'package:test/test.dart';
-
-class EmailValidation implements FieldValidation {
-  final String field;
-
-  EmailValidation(this.field);
-
-  String validate(String value) {
-    final regex = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    final isValid = value?.isNotEmpty != true || regex.hasMatch(value);
-    return isValid ? null : 'Wrong field';
-  }
-}
 
 void main() {
   EmailValidation sut;
@@ -34,7 +21,7 @@ void main() {
     expect(sut.validate(faker.internet.email()), null);
   });
 
-  test('Should return error if email is valid', () {
+  test('Should return error if email is invalid', () {
     expect(sut.validate(faker.lorem.word()), 'Wrong field');
   });
 }

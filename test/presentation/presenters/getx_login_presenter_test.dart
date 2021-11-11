@@ -14,7 +14,7 @@ class ValidationSpy extends Mock implements Validation {}
 class AuthenticationSpy extends Mock implements Authentication {}
 
 void main() {
-  StreamLoginPresenter sut;
+  GetxLoginPresenter sut;
   AuthenticationSpy authentication;
   ValidationSpy validation;
   String email;
@@ -42,7 +42,7 @@ void main() {
   setUp(() {
     validation = ValidationSpy();
     authentication = AuthenticationSpy();
-    sut = StreamLoginPresenter(
+    sut = GetxLoginPresenter(
         validation: validation, authentication: authentication);
     email = faker.internet.email();
     password = faker.internet.password();
@@ -119,13 +119,11 @@ void main() {
     sut.validatePassword(password);
   });
 
-  test('Should emit error null if field validation succeed', () async {
+  test('Should emit password error if validation fails', () async {
     sut.emailErrorStream.listen(expectAsync1((error) => expect(error, null)));
     sut.passwordErrorStream
         .listen(expectAsync1((error) => expect(error, null)));
-
     expectLater(sut.isFormValidStream, emitsInOrder([false, true]));
-
     sut.validateEmail(email);
     await Future.delayed(Duration.zero);
     sut.validatePassword(password);
@@ -156,7 +154,7 @@ void main() {
     sut.validateEmail(email);
     sut.validatePassword(password);
 
-    expectLater(sut.isLoadingStream, emits(false));
+    expectLater(sut.isLoadingStream, emitsInOrder([true, false]));
     sut.mainErrorStream
         .listen(expectAsync1((error) => expect(error, 'Invalid credentials.')));
 
@@ -168,17 +166,10 @@ void main() {
     sut.validateEmail(email);
     sut.validatePassword(password);
 
-    expectLater(sut.isLoadingStream, emits(false));
+    expectLater(sut.isLoadingStream, emitsInOrder([true, false]));
     sut.mainErrorStream
         .listen(expectAsync1((error) => expect(error, 'Unexpected error.')));
 
     await sut.auth();
-  });
-
-  test('Should not emit after dispose', () async {
-    expectLater(sut.emailErrorStream, neverEmits(null));
-
-    sut.dispose();
-    sut.validateEmail(email);
   });
 }

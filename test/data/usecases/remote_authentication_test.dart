@@ -1,6 +1,6 @@
 import 'package:clean_flutter_app/data/http/http.dart';
 import 'package:clean_flutter_app/data/usecases/usecases.dart';
-import 'package:clean_flutter_app/domain/helper/helper.dart';
+import 'package:clean_flutter_app/domain/helpers/helpers.dart';
 import 'package:clean_flutter_app/domain/usecases/usecases.dart';
 import 'package:faker/faker.dart';
 import 'package:mockito/mockito.dart';

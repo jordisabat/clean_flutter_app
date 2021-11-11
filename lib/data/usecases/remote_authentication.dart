@@ -1,6 +1,6 @@
 import 'package:clean_flutter_app/data/models/models.dart';
 import 'package:clean_flutter_app/domain/entities/entities.dart';
-import 'package:clean_flutter_app/domain/helper/helper.dart';
+import 'package:clean_flutter_app/domain/helpers/helpers.dart';
 import 'package:meta/meta.dart';
 
 import '../../domain/usecases/usecases.dart';
